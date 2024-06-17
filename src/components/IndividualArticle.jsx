@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { getArticleById } from "../../API"
-import { Card, Container } from 'react-bootstrap';
+import { Card, Container, Spinner } from 'react-bootstrap';
 import '../App.css'
 
 
@@ -9,12 +9,14 @@ const IndividialArticle = () => {
 
   const { article_id } = useParams()
   const [article, setArticle] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
+    setIsLoading(true)
     getArticleById(article_id)
       .then(({ article }) => {
         setArticle(article)
-        console.log(article)
+        setIsLoading(false)
       })
       .catch((err) => {
         console.log(err)
@@ -22,8 +24,12 @@ const IndividialArticle = () => {
   }, [article_id])
 
 
-  if (!article) {
-    return <p>Loading...</p>
+  if (isLoading) {
+    return (
+      <Container className="spinner" style={{ minHeight: '100vh' }}>
+        <Spinner animation="border" role="status"> </Spinner>
+      </Container>
+    );
   }
 
   return (

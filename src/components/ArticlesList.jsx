@@ -1,25 +1,34 @@
 import { useEffect, useState } from "react"
 import { getArticles } from "../../API"
-import { Card, Container, Row, Col } from 'react-bootstrap';
-import '../App.css'
+import { Card, Container, Row, Col, Spinner } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import '../App.css'
 
 const ArticlesList = () => {
 
     const [articles, setArticles] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
+
 
     useEffect(() => {
+        setIsLoading(true)
         getArticles()
             .then(({ articles }) => {
                 setArticles(articles)
+                setIsLoading(false)
             })
             .catch((err) => {
                 console.log(err)
             })
     }, [])
 
-
-
+    if(isLoading) {
+        return (
+            <Container className="spinner" style={{ minHeight: '100vh' }}>
+                <Spinner animation="border" role="status"> </Spinner>
+            </Container>
+        );
+    }
 
     return (
         <Container>
