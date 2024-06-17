@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Header from './components/Header'
 import HomePage from './components/HomePage'
 import ArticlesList from './components/ArticlesList'
+import IndividialArticle from './components/IndividualArticle'
 
 function App() {
 
@@ -12,8 +13,9 @@ function App() {
       <Header />
       <Routes>
         <Route path='/' element={<HomePage />} />
-        <Route path='/home' element={<HomePage />}></Route>
-        <Route path='/articles' element={<ArticlesList />}></Route>
+        <Route path='/home' element={<HomePage />} />
+        <Route path='/articles' element={<ArticlesList />} />
+        <Route path='/articles/:article_id' element={<IndividialArticle />} />
       </Routes>
     </BrowserRouter>
   )

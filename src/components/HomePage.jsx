@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { getArticles } from "../../API"
 import { Card, Container, Row, Col } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 
 
 const HomePage = () => {
@@ -29,10 +30,11 @@ const HomePage = () => {
 
 return (
     <Container>
-            <h1 className="mt-4 mb-4">TCC Trending</h1>
+            <h1 className="articles-list">TCC Trending</h1>
             <Row xs={1} md={2} lg={3} className="g-4">
                 {sortedArticles.map(item => (
                     <Col key={item.article_id}>
+                        <Link to={`/articles/${item.article_id}`} className="link" >
                         <Card>
                             {item.article_img_url && <Card.Img variant="top" src={item.article_img_url} />}
                             <Card.Body>
@@ -45,6 +47,7 @@ return (
                                 </Card.Text>
                             </Card.Body>
                         </Card>
+                        </Link>
                     </Col>
                 ))}
             </Row>
