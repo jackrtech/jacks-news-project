@@ -18,5 +18,18 @@ export const getArticleById = (article_id) => {
         .get(url + `/${article_id}`)
         .then((response) => response.data)
         .catch((err) => console.log(err))
-        
+
 }
+
+
+
+export const getCommentsByArticleId = (article_id) => {
+
+    return axios
+        .get(url + `/${article_id}/comments`)
+        .then((response) => response.data)
+        .catch((err) => console.log(err))
+}
+
+
+

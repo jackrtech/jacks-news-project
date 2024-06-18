@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { getArticleById } from "../../API"
-import { Card, Container, Spinner } from 'react-bootstrap';
+import { Card, Container, Spinner, Row, Col } from 'react-bootstrap';
 import '../App.css'
+import CommentList from "./CommentList";
 
 
 const IndividialArticle = () => {
@@ -32,22 +33,32 @@ const IndividialArticle = () => {
     );
   }
 
+
+
   return (
     <Container className="centered-container">
-      <Card style={{ width: '50rem' }}>
-        {article.article_img_url && <Card.Img variant="top" src={article.article_img_url} />}
-        <Card.Body>
-          <Card.Title>{article.title}</Card.Title>
-          <Card.Text>
-            {article.body}
-          </Card.Text>
-          <Card.Text>
-            <strong>Author: </strong> {article.author} <strong className="votes">Votes:</strong> {article.votes}
-          </Card.Text>
-        </Card.Body>
-      </Card>
+      <Row>
+        <Col md={8}>
+          <Card>
+            {article.article_img_url && <Card.Img variant="top" src={article.article_img_url} />}
+            <Card.Body>
+              <Card.Title>{article.title}</Card.Title>
+              <Card.Text>{article.body}</Card.Text>
+              <Card.Text>
+                <strong>Author: </strong> {article.author} <strong className="votes">Votes:</strong> {article.votes}
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col md={4}>
+          <CommentList />
+        </Col>
+      </Row>
     </Container>
   );
-}
+};
+
+
 
 export default IndividialArticle
+
