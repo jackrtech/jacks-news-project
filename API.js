@@ -33,3 +33,10 @@ export const getCommentsByArticleId = (article_id) => {
 
 
 
+export const updateArticleVotes = (article_id, voteChange) => {
+
+    return axios
+        .patch(url + `/${article_id}`, { votes: voteChange })
+        .then((response) => response.data)
+        .catch((err) => console.log(err));
+};
