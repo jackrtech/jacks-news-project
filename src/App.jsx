@@ -9,6 +9,8 @@ import CommentList from './components/CommentList'
 
 function App() {
 
+  console.log('string')
+
   return (
     <BrowserRouter>
       <Header />
