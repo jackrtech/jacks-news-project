@@ -14,12 +14,9 @@ const CommentList = () => {
         getCommentsByArticleId(article_id)
             .then(({ comments }) => {
                 setComments(comments)
-                console.log(comments)
             })
             .catch((err) => console.log(err))
     }, [article_id])
-
-
 
 
     return (
