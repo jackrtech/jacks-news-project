@@ -9,7 +9,7 @@ import CommentList from './components/CommentList'
 
 function App() {
 
-  console.log('st')
+  console.log('stsss')
 
   return (
     <BrowserRouter>
