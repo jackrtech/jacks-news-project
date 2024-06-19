@@ -6,11 +6,13 @@ import HomePage from './components/HomePage'
 import ArticlesList from './components/ArticlesList'
 import IndividialArticle from './components/IndividualArticle'
 import CommentList from './components/CommentList'
+import { UserProvider } from './components/UserComponent'
 
 function App() {
 
 
   return (
+    <UserProvider>
     <BrowserRouter>
       <Header />
       <Routes>
@@ -21,6 +23,7 @@ function App() {
         <Route path='/articles/:article_id' element={<CommentList />} />
       </Routes>
     </BrowserRouter>
+    </UserProvider>
   )
 }
 
