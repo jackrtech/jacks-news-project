@@ -12,6 +12,16 @@ export const getArticles = () => {
 
 
 
+export const getArticleTopics = () => {
+
+    return axios 
+        .get(url + `/topics`)
+        .then((response) => response.data)
+        .catch((err) => console.log(err))
+
+}
+
+
 export const getUsers= () => {
 
     return axios  
