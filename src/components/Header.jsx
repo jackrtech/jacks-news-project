@@ -4,7 +4,6 @@ import { UserContext } from "./UserComponent";
 
 const Header = () => {
   const { user } = useContext(UserContext);
-  console.log(user)
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg">

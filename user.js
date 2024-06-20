@@ -1,8 +1,6 @@
 
 export const defaultUser = {
-    username : 'jackrrr123',
-    name : 'Jack Rowsell',
-    avatar_url: 'https://i.pinimg.com/736x/fa/39/eb/fa39eb88592bf16aebab746f88068ac7.jpg'
+    username : 'tickle122',
+    name : 'Tom Tickle',
+    avatar_url: '"https://vignette.wikia.nocookie.net/mrmen/images/d/d6/Mr-Tickle-9a.png/revision/latest?cb=20180127221953"'
 }
-
-console.log(defaultUser.avatar_url)
