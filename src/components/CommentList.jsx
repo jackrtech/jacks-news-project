@@ -63,7 +63,7 @@ const CommentList = () => {
     const handleDeleteComment = (comment_id) => {
 
         deleteArticleComments(comment_id)
-            .then((response) => {
+            .then(() => {
                 setComments(comments.filter(comment => comment.comment_id !== comment_id))
             })
             .catch((err) => {
