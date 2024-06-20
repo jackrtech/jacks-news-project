@@ -10,6 +10,8 @@ export const getArticles = () => {
         .catch((err) => console.log(err))
 }
 
+
+
 export const getUsers= () => {
 
     return axios  
@@ -17,6 +19,7 @@ export const getUsers= () => {
         .then((response) => response.data)
         .catch((err) => console.log(err))
 }
+
 
 
 export const getArticleById = (article_id) => {
@@ -48,10 +51,9 @@ export const updateArticleVotes = (article_id, voteChange) => {
         .catch((err) => console.log(err));
 };
 
-export const updateArticleComments = (article_id, newComment) => {
 
-    console.log(article_id)
-    console.log(newComment)
+
+export const updateArticleComments = (article_id, newComment) => {
 
     return axios   
         .post(url + `/articles/${article_id}/comments`, newComment)
@@ -59,4 +61,16 @@ export const updateArticleComments = (article_id, newComment) => {
         .catch((err) => {
             console.log(err)
         })
+}
+
+
+
+export const deleteArticleComments = (comment_id) => {
+
+    return axios   
+        .delete(url + `/comments/${comment_id}`)
+        .then((response) => {
+            return response.data
+        })
+        .catch((err) => console.log(err))
 }

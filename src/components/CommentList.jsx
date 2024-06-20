@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { getCommentsByArticleId, getUsers, updateArticleComments } from "../../API"
+import { deleteArticleComments, getCommentsByArticleId, getUsers, updateArticleComments } from "../../API"
 import { Container, Row, Col, Card, Image, Form, Button } from "react-bootstrap";
 import '../App.css'
 import { UserContext } from "./UserComponent";
@@ -60,6 +60,18 @@ const CommentList = () => {
     };
 
 
+    const handleDeleteComment = (comment_id) => {
+
+        deleteArticleComments(comment_id)
+            .then((response) => {
+                setComments(comments.filter(comment => comment.comment_id !== comment_id))
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
+
     return (
         <Container >
             <Row>
@@ -85,6 +97,9 @@ const CommentList = () => {
                                             <div>
                                                 <Image src={getUserURL(comment.author)} roundedCircle width="30" height="30" />
                                                 <strong>{comment.author}</strong>
+                                                {user.username === comment.author && (
+                                                        <Button className="delete-button" size="sm" variant="outline-danger" onClick={() => handleDeleteComment(comment.comment_id)}>Delete</Button>
+                                                    )} 
                                             </div>
                                         </Card.Body>
                                     </Card>
