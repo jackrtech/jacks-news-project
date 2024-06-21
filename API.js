@@ -11,15 +11,15 @@ export const getArticles = () => {
 }
 
 
-// export const getArticlesByTopic = (topic) => {
+export const getArticlesByTopic = (topic) => {
 
-//     const query = topic ? `?topic=${topic}` : '';
+    const query = topic ? `?topic=${topic}` : '';
 
-//     return axios
-//         .get(url + `/articles${query}`)
-//         .then((response) => response.data)
-//         .catch((err) => console.log(err));
-// }
+    return axios
+        .get(url + `/articles${query}`)
+        .then((response) => response.data)
+        .catch((err) => console.log(err));
+}
 
 
 export const getArticleTopics = () => {
