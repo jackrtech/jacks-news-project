@@ -10,16 +10,16 @@ export const getArticles = () => {
         .catch((err) => console.log(err))
 }
 
+export const getArticlesByTopic = (topic) => {
+    
+    const query = topic ? `?topic=${topic}` : '';
 
-// export const getArticlesByTopic = (topic) => {
+    return axios
+        .get(url + `/articles${query}`)
+        .then((response) => response.data)
+        .catch((err) => console.log(err));
+};
 
-//     const query = topic ? `?topic=${topic}` : '';
-
-//     return axios
-//         .get(url + `/articles${query}`)
-//         .then((response) => response.data)
-//         .catch((err) => console.log(err));
-// }
 
 
 export const getArticleTopics = () => {

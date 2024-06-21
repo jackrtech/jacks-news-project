@@ -31,19 +31,19 @@ const ArticlesList = () => {
                 setIsLoading(false);
             });
     }, []); 
- 
+
 
     const handleTopicSelect = (topic) => {
         setSelectedTopic(topic);
     };
 
-    
-    const filteredArticles = selectedTopic ? articles.filter(article => article.topic === selectedTopic) : articles;
-
+    const filteredArticles = selectedTopic
+        ? articles.filter(article => article.topic === selectedTopic)
+        : articles;
 
     if (isLoading) {
         return (
-            <Container className="spinner" style={{ minHeight: '100vh' }}>
+            <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
                 <Spinner animation="border" role="status">
                     <span className="visually-hidden">Loading...</span>
                 </Spinner>
@@ -51,7 +51,6 @@ const ArticlesList = () => {
         );
     }
 
-    
     return (
         <Container>
             <h1 className="articles-list">Articles {selectedTopic && `in ${selectedTopic}`}</h1>
