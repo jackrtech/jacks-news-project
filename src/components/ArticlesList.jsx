@@ -1,54 +1,49 @@
 import { useEffect, useState } from "react";
-import { getArticleTopics, getArticles } from "../../API";
+import { getArticleTopics, getArticles } from "../../API"; 
 import { Card, Container, Row, Col, Spinner, Dropdown, DropdownButton } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import '../App.css';
 
-
 const ArticlesList = () => {
     const [articles, setArticles] = useState([]);
-    const [filteredArticles, setFilteredArticles] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [selectedTopic, setSelectedTopic] = useState('');
     const [topics, setTopics] = useState([]);
-
+    const [selectedTopic, setSelectedTopic] = useState(null); 
 
     useEffect(() => {
         setIsLoading(true);
 
-        Promise.all([getArticles(), getArticleTopics()])
-            .then(([articlesResponse, topicsResponse]) => {
-                setArticles(articlesResponse.articles);
-                setFilteredArticles(articlesResponse.articles); 
+        getArticleTopics()
+            .then((topicsResponse) => {
                 setTopics(topicsResponse.topics);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
+        getArticles()
+            .then((articlesResponse) => {
+                setArticles(articlesResponse.articles);
                 setIsLoading(false);
             })
             .catch((err) => {
                 console.log(err);
                 setIsLoading(false);
             });
-    }, []);
+    }, []); 
+ 
 
-
-    useEffect(() => {
-        if (selectedTopic) {
-            const filtered = articles.filter(article => article.topic === selectedTopic);
-            setFilteredArticles(filtered);
-        } else {
-            setFilteredArticles(articles);
-        }
-    }, [selectedTopic, articles]);
-
-
-    const handleTopicChange = (topic) => {
+    const handleTopicSelect = (topic) => {
         setSelectedTopic(topic);
-        console.log(topic);
     };
+
+    
+    const filteredArticles = selectedTopic ? articles.filter(article => article.topic === selectedTopic) : articles;
 
 
     if (isLoading) {
         return (
-            <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+            <Container className="spinner" style={{ minHeight: '100vh' }}>
                 <Spinner animation="border" role="status">
                     <span className="visually-hidden">Loading...</span>
                 </Spinner>
@@ -56,15 +51,15 @@ const ArticlesList = () => {
         );
     }
 
-
+    
     return (
         <Container>
-            <h1 className="articles-list">All Articles</h1>
+            <h1 className="articles-list">Articles {selectedTopic && `in ${selectedTopic}`}</h1>
             <div id="bg-nested-dropdown" className="mb-4">
                 <DropdownButton title="Topics">
-                    <Dropdown.Item onClick={() => handleTopicChange('')}>All Topics</Dropdown.Item>
+                    <Dropdown.Item onClick={() => handleTopicSelect(null)}>All Topics</Dropdown.Item>
                     {topics.map(topic => (
-                        <Dropdown.Item key={topic.slug} onClick={() => handleTopicChange(topic.slug)}>
+                        <Dropdown.Item key={topic.slug} onClick={() => handleTopicSelect(topic.slug)}>
                             {topic.slug}
                         </Dropdown.Item>
                     ))}
